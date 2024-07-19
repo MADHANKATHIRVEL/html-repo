@@ -2,7 +2,7 @@
 FROM nginx:alpine
 
 # Copy the HTML file from GitHub to the appropriate directory in the container
-RUN wget https://raw.githubusercontent.com/your-username/your-repo/main/index.html -O /usr/share/nginx/html/index.html
+RUN wget https://https://github.com/MADHANKATHIRVEL/html-repo/blob/main/new-html-file-for-check -O /usr/share/nginx/html/index.html
 
 # Expose port 80
 EXPOSE 80
