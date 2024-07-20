@@ -2,7 +2,8 @@ name: CICD
 
 on:
   push:
-    branches: [test-branch]
+    branches: 
+      - test-branch
 
 jobs:
   build:
@@ -39,10 +40,10 @@ jobs:
           ssh-private-key: ${{ secrets.EC2_KEY }}
 
       - name: Deploy to EC2
-    run:
-        ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-          docker pull ${{ secrets.DOCKER_USERNAME }}/my-html-app:latest
-          docker stop my-html-app || true
-          docker rm my-html-app || true
-          docker run -d --name my-html-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-html-app:latest
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+            docker pull ${{ secrets.DOCKER_USERNAME }}/my-html-app:latest
+            docker stop my-html-app || true
+            docker rm my-html-app || true
+            docker run -d --name my-html-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-html-app:latest
           EOF
